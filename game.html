@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เกมทายคำศัพท์ภาษาอังกฤษ</title>
+    <link rel="stylesheet" href="css.css">
+</head>
+
+<body>
+    <div class="logo1">
+        <div class="icon1">
+            <span>Ew</span>
+        </div>
+        <h1>English <span>Word-Whiz</span></h1>
+    </div>
+
+    <div class="main1-container">
+        <div id="game-container">
+            <div id="english-word">คำนำหน้า</div>
+            <div id="options">
+                <button id="option1" onclick="checkAnswer('option1')">Prefix</button>
+                <button id="option2" onclick="checkAnswer('option2')">Suffix</button>
+                <button id="option3" onclick="checkAnswer('option3')">Root</button>
+            </div>
+            <div id="feedback"></div>
+            <div id="timer">เวลาที่เหลือ: 10 วินาที</div>
+            <div id="score">คะแนน: 0</div>
+            <button id="reset-button" onclick="resetGame()">เริ่มใหม่</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

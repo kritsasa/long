@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เกมทายคำศัพท์ภาษาอังกฤษ</title>
+    <link rel="stylesheet" href="css.css">
+</head>
+
+<body>
+    <div class="logo1">
+        <div class="icon1">
+            <span>Ew</span>
+        </div>
+        <h1>English <span>Word-Whiz</span></h1>
+    </div>
+
+    <div class="main1-container">
+        <h1>English Vocabulary Game</h1>
+        <p>มาฝึกภาษาอังกฤษผ่านการเล่นเกมสนุก ๆ กันเถอะ!</p>
+        <a href="#" class="start-button" onclick="startGame()">เริ่มเกม</a>
+    </div>
+
+    <script>
+        const startSound = new Audio('start.mp4'); // เพิ่มไฟล์เสียงที่คุณต้องการ
+
+        function playStartSound() {
+            startSound.play();
+        }
+
+        function startGame() {
+            playStartSound(); // เล่นเสียงเมื่อกดปุ่มเริ่มเกม
+            localStorage.setItem('score', 0);
+            localStorage.setItem('gameStarted', true);
+            // Redirect to game page
+            setTimeout(() => {
+                window.location.href = 'game.html';
+            }, 300); // รอให้เสียงเล่นก่อนเปลี่ยนหน้า
+        }
+    </script>
+</body>
+
+</html>
