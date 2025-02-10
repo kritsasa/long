@@ -99,14 +99,6 @@ const wordPairs = [
   { "english": "walk", "thai": "เดิน" },
   { "english": "watch", "thai": "ดู" },
   { "english": "water", "thai": "น้ำ" },
-  { "english": "we", "thai": "เรา" },
-  { "english": "weather", "thai": "อากาศ" },
-  { "english": "well", "thai": "ดี" },
-  { "english": "where", "thai": "ที่ไหน" },
-  { "english": "woman", "thai": "ผู้หญิง" },
-  { "english": "work", "thai": "ทำงาน" },
-  { "english": "year", "thai": "ปี" },
-  { "english": "young", "thai": "อายุน้อย" }
   // เพิ่มคำศัพท์ตามที่ต้องการ
 ];
 
@@ -257,3 +249,50 @@ function playResetSound() {
   resetSound.currentTime = 0;  // รีเซ็ตเวลาเริ่มต้นของเสียง
   resetSound.play();  // เล่นเสียงใหม่
 }
+let currentQuestion = 0; // ตัวแปรนับจำนวนข้อ
+
+function nextWord() {
+  if (usedWords.length === wordPairs.length) {
+    document.getElementById('english-word').textContent = "เกมจบแล้ว!";
+    document.getElementById('feedback').textContent = "ไม่มีคำเพิ่มเติม";
+    document.getElementById('feedback').className = 'incorrect';
+    clearInterval(timer);
+    document.getElementById('options').style.display = 'none';
+    return;
+  }
+
+  clearInterval(timer);
+  startTimer();
+
+  currentQuestion++; // เพิ่มเลขข้อ
+  document.getElementById('question-counter').textContent = `${currentQuestion}/${wordPairs.length}`;
+
+  const remainingWords = wordPairs.filter((_, index) => !usedWords.includes(index));
+  if (remainingWords.length === 0) return;
+
+  const randomIndex = Math.floor(Math.random() * remainingWords.length);
+  currentWordPair = remainingWords[randomIndex];
+  const originalIndex = wordPairs.findIndex(pair => pair.english === currentWordPair.english);
+  usedWords.push(originalIndex);
+
+  document.getElementById('english-word').textContent = currentWordPair.english;
+
+  const options = [currentWordPair.thai];
+  while (options.length < 3) {
+    const randomPair = wordPairs[Math.floor(Math.random() * wordPairs.length)];
+    if (!options.includes(randomPair.thai)) {
+      options.push(randomPair.thai);
+    }
+  }
+
+  options.sort(() => Math.random() - 0.5);
+
+  document.getElementById('option1').textContent = options[0];
+  document.getElementById('option2').textContent = options[1];
+  document.getElementById('option3').textContent = options[2];
+
+  document.getElementById('feedback').textContent = "";
+  document.getElementById('options').style.display = 'block';
+}
+
+// ใน HTML เพิ่ม <div id="question-counter" style="position: absolute; top: 10px; right: 10px; font-size: 18px; color: #fff;"></div>
